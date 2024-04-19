@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:bmi_calculator/constants/constans.dart';
 class cardInhalt extends StatelessWidget {
    cardInhalt({
      required this.icon, required this.label
   });
-  final textStyle = const TextStyle(
-      fontSize: 18.00,
-      color: Colors.white
-  );
+
   final IconData icon;
   final String label;
   @override
@@ -21,7 +19,7 @@ class cardInhalt extends StatelessWidget {
         SizedBox(height: 10.0), // Adjusted height for spacing
         Text(
           label,
-          style: textStyle,
+          style: kTextStyle,
         ),
       ],
     );
