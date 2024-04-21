@@ -1,11 +1,14 @@
 import 'dart:ffi';
-
 import 'package:bmi_calculator/widgets/Cardinhalt.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/widgets/REusablecard.dart';
+import 'package:bmi_calculator/widgets/RoundActionButton.dart';
 import 'package:bmi_calculator/constants/constans.dart';
+import 'result__Page.dart';
+import 'package:bmi_calculator/logic/bmi_brain.dart';
 
 const buttomContainerHeight = 80.0;
 
@@ -137,7 +140,6 @@ class _InputPageState extends State<InputPage> {
                           calculate: () {
                             setState(() {
                               kWeight++;
-                              print('pressed');
                             });
                           },
                           iconNeeded: FontAwesomeIcons.plus,
@@ -149,7 +151,6 @@ class _InputPageState extends State<InputPage> {
                           calculate: () {
                             setState(() {
                               kWeight++;
-                              print('pressed');
                             });
                           },
                           iconNeeded: FontAwesomeIcons.minus,
@@ -159,35 +160,79 @@ class _InputPageState extends State<InputPage> {
                   ],
                 ),
               )),
-              Expanded(child: Reusablecard(mcolor: kContainerCArdColor)),
+              Expanded(
+                  child: Reusablecard(
+                mcolor: kContainerCArdColor,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'Age',
+                      style: kTextStyle,
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    Text(
+                      kAge.toString(),
+                      style: kValuenumbers,
+                    ),
+                    SizedBox(
+                      width: 30.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        RounActionButton(
+                          calculate: () {
+                            setState(() {
+                              kAge++;
+                            });
+                          },
+                          iconNeeded: FontAwesomeIcons.plus,
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        RounActionButton(
+                          calculate: () {
+                            setState(() {
+                              kAge++;
+                            });
+                          },
+                          iconNeeded: FontAwesomeIcons.minus,
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              )),
             ],
           )),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            width: double.infinity,
-            color: kPopularPinkColor,
-            height: buttomContainerHeight,
+          GestureDetector(
+            onTap: () {
+              Bmi calc= Bmi(height: kHeight, weight: kWeight);
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ResultsPage(resultMessage: calc.Resultmessage(),resultValue: calc.CalculateBmi(),theMessage: calc.Checkresult(),)));
+            },
+            child: Container(
+              child: Center(
+                child: Text(
+                  'CALCULATE',
+                  style: kCLickingResult,
+
+                ),
+              ),
+              padding: const EdgeInsets.only(bottom: 20),
+              width: double.infinity,
+              color: kPopularPinkColor,
+              height: buttomContainerHeight,
+            ),
           )
         ],
       ),
-    );
-  }
-}
-
-class RounActionButton extends StatelessWidget {
-  RounActionButton({required this.iconNeeded, required this.calculate});
-
-  final IconData iconNeeded;
-  final Function() calculate;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: calculate,
-      fillColor: Color(0xFF4C4F5E),
-      child: Icon(iconNeeded),
-      constraints: BoxConstraints.tightFor(width: 65.0, height: 65.0),
-      shape: CircleBorder(),
     );
   }
 }

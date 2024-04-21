@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:bmi_calculator/constants/constans.dart';
+
+import 'package:bmi_calculator/constants/constans.dart';
 enum Gender { male, female }
 
-Color maleCardColor = kContainerCArdColor;
-Color femaleCardColor = kContainerCArdColor;
+
 
 class Reusablecard extends StatelessWidget {
   Reusablecard({required this.mcolor, this.cardChild, this.onpress});
