@@ -150,7 +150,7 @@ class _InputPageState extends State<InputPage> {
                         RounActionButton(
                           calculate: () {
                             setState(() {
-                              kWeight++;
+                              kWeight--;
                             });
                           },
                           iconNeeded: FontAwesomeIcons.minus,
@@ -199,7 +199,7 @@ class _InputPageState extends State<InputPage> {
                         RounActionButton(
                           calculate: () {
                             setState(() {
-                              kAge++;
+                              kAge--;
                             });
                           },
                           iconNeeded: FontAwesomeIcons.minus,
